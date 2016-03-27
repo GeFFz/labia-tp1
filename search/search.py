@@ -92,8 +92,6 @@ def depthFirstSearch(problem):
   visited[currentState] = currentState
 
   while True:
-    print currentState
-    print stack.__dict__
     possibleStates = problem.getSuccessors(currentState)
 
     for state in possibleStates:
@@ -116,7 +114,6 @@ def depthFirstSearch(problem):
       currentState = nextState[0]
 
   return moves
-
 
 def breadthFirstSearch(problem):
   "Search the shallowest nodes in the search tree first. [p 81]"
