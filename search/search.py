@@ -84,36 +84,23 @@ def depthFirstSearch(problem):
   """
   "*** YOUR CODE HERE ***"
 
+  stack = util.Stack() # (state, path)
   visited = {}
-  moves = []
-  stack = util.Stack()
 
-  currentState = problem.getStartState()
-  visited[currentState] = currentState
+  stack.push( (problem.getStartState(), []) )
 
-  while True:
-    possibleStates = problem.getSuccessors(currentState)
+  while not stack.isEmpty():
+    currentState, path = stack.pop()
 
-    for state in possibleStates:
-      if not visited.has_key(state[0]):
-        stack.push(state)
+    if problem.isGoalState(currentState):
+      return path
 
-    if stack.isEmpty():
-      break
+    visited[currentState] = True
 
-    nextState = stack.pop()
+    for state, action, _ in problem.getSuccessors(currentState):
+      if not visited.has_key(state):
+        stack.push( (state, path + [action]) )
 
-    if nextState in possibleStates:
-      moves.append(nextState[1])
-      visited[nextState[0]] = currentState
-      currentState = nextState[0]
-    else:
-      stack.push(nextState)
-      nextState = filter(lambda state: state[0] == visited[currentState], problem.getSuccessors(currentState))[0]
-      moves.append(nextState[1])
-      currentState = nextState[0]
-
-  return moves
 
 def breadthFirstSearch(problem):
   "Search the shallowest nodes in the search tree first. [p 81]"
