@@ -101,16 +101,53 @@ def depthFirstSearch(problem):
       if not visited.has_key(state):
         stack.push( (state, path + [action]) )
 
+    # Reverse
+    # for state, action, _ in reversed(problem.getSuccessors(currentState)):
+    #   if not visited.has_key(state):
+    #     stack.push( (state, path + [action]) )
+
 
 def breadthFirstSearch(problem):
   "Search the shallowest nodes in the search tree first. [p 81]"
   "*** YOUR CODE HERE ***"
-  util.raiseNotDefined()
+  
+  queue = util.Queue() # (state, path)
+  visited = {}
+
+  queue.push( (problem.getStartState(), []) )
+
+  while not queue.isEmpty():
+    currentState, path = queue.pop()
+
+    if problem.isGoalState(currentState):
+      return path
+
+    visited[currentState] = True
+
+    for state, action, _ in problem.getSuccessors(currentState):
+      if not visited.has_key(state):
+        queue.push( (state, path + [action]) )
       
 def uniformCostSearch(problem):
   "Search the node of least total cost first. "
   "*** YOUR CODE HERE ***"
-  util.raiseNotDefined()
+  
+  queue = util.PriorityQueue() # (state, path)
+  visited = {}
+
+  queue.push( (problem.getStartState(), []) , 0)
+
+  while not queue.isEmpty():
+    currentState, path = queue.pop()
+
+    if problem.isGoalState(currentState):
+      return path
+
+    visited[currentState] = True
+
+    for state, action, cost in problem.getSuccessors(currentState):
+      if not visited.has_key(state):
+        queue.push( (state, path + [action]) , cost)
 
 def nullHeuristic(state, problem=None):
   """
@@ -119,10 +156,28 @@ def nullHeuristic(state, problem=None):
   """
   return 0
 
+def myHeuristic():
+  pass
+
 def aStarSearch(problem, heuristic=nullHeuristic):
   "Search the node that has the lowest combined cost and heuristic first."
   "*** YOUR CODE HERE ***"
-  util.raiseNotDefined()
+  queue = util.PriorityQueueWithFunction(myHeuristic) # (state, path)
+  visited = {}
+
+  queue.push( (problem.getStartState(), []) , 0)
+
+  while not queue.isEmpty():
+    currentState, path = queue.pop()
+
+    if problem.isGoalState(currentState):
+      return path
+
+    visited[currentState] = True
+
+    for state, action, cost in problem.getSuccessors(currentState):
+      if not visited.has_key(state):
+        queue.push( (state, path + [action]) , cost)
     
   
 # Abbreviations
