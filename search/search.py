@@ -156,8 +156,8 @@ def nullHeuristic(state, problem=None):
   """
   return 0
 
-def myHeuristic():
-  pass
+def myHeuristic(item):
+  return manhattanDistance(item, (0,0))
 
 def aStarSearch(problem, heuristic=nullHeuristic):
   "Search the node that has the lowest combined cost and heuristic first."
