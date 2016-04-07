@@ -1,10 +1,12 @@
-#### CENTRO FEDERAL DE EDUCAÇÃO TECNOLÓGICA DE MINAS GERAIS
-#### ENGENHARIA DE COMPUTAÇÃO
-#### LABORATÓRIO DE INTELIGÊNCIA ARTIFICIAL
-#### Prof. Flávio Cruzeiro
+> CENTRO FEDERAL DE EDUCAÇÃO TECNOLÓGICA DE MINAS GERAIS
+> ENGENHARIA DE COMPUTAÇÃO
+> LABORATÓRIO DE INTELIGÊNCIA ARTIFICIAL
+> Prof. Flávio Cruzeiro
 
 ## TRABALHO PRÁTICO I: PACMAN
-### por Pedro Felipe Froes & Saulo Antunes
+#### por Pedro Felipe Froes & Saulo Antunes
+
+
 
 ##### Passo 1: Implementação da DFS
 Para implementar o algoritmo de busca em profundidade (DFS, *depth first search*), foram utilizados as funções pré-implementadas no arquivo `util.py` de pilha (`util.Stack()`) em conjunto com os métodos para obter o estado inicial, obter os estados sucessores do estado atual e verificar se o mesmo é o final.
@@ -19,7 +21,7 @@ Os itens 1, 2 e 3 são repetidos até a fila estiver vazia, ou até encontrar o 
 
 **A ordem de exploração foi de acordo com o esperado? O Pacman realmente passa por  todos os estados explorados no seu caminho para o objetivo?**
 
-![alt text](img/001.png “DFS”)
+![DFS](img/001.png)
 *Testando a DFS em um* `mediumMaze`*.*
 
 Na figura acima, os estados são coloridos mais intensamente de acordo com o número de vezes que foram visitados pela DFS. Assim, os estados com um vermelho mais vivo foram visitados mais vezes pelo algoritmo, enquanto os estados não coloridos nem chegam a ser explorados. Portanto, o Pacman não passa por todos os estados explorados, e sim apenas pelo caminho que o levará até seu objetivo.
@@ -48,7 +50,7 @@ Win Rate:      1/1 (1.00)
 Record:        Win
 ```
 
-**Essa é uma solução ótima? Senão, o que a busca em profundidade está fazendo de errado?**
+**Essa é uma solução ótima? Se não, o que a busca em profundidade está fazendo de errado?**
 
 Embora a DFS seja completa com a verificação de estados já visitados, ela não pode ser considerada ótima, pois ela retorna o primeiro caminho até o objetivo – e o primeiro caminho encontrado nem sempre é o caminho ótimo até o mesmo.
 
@@ -57,7 +59,7 @@ A busca em extensão (BFS, *breath first search*) tem implementação similar à
 
 A implementação é análoga aos 3 passos da DFS, exceto que foi utilizada uma `util.Queue()` ao invés da pilha. O custo para o `bigMaze` (mostrado na figura abaixo) foi de 210, enquanto o do `mediumMaze` foi de 68. O `bigMaze` foi executado com o mesmo custo que o DFS; o `mediumMaze`, no entanto, teve uma diferença de custo de 62 em relação à DFS, ou seja, o seu custo foi quase duas vezes menor.
 
-<img src=“img/002.png”>
+![BFS](img/002.png)
 *BFS no* `bigMaze`*.*
 
 **A busca BFS encontra a solução ótima?**
@@ -110,12 +112,12 @@ After 13 moves: up
 ##### Passo 3: Variando a função de custo
 A DFS e a BFS não consideravam o custo para a sequência de movimentos do Pacman. Para implementar um algoritmo que considera custos diferentes entre os possíveis movimentos – nesse caso, a busca de custo uniforme – basta realizar duas alterações no algoritmo genérico de busca: o passo 3 considera agora o custo em conjunto com o estado e a ação dos sucessores do estado atual, e uma fila de prioridades é utilizada em detrimento de uma pilha ou fila regular.
 
-Para o `mediumMaze` regular utilizado, a busca teve custo total de 152 
-{{DUVIDA: não deveria ser equivalente ao BFS}}
+Para o `mediumMaze` regular utilizado, a busca teve custo total de 152.
+**{{DUVIDA: não deveria ser equivalente ao BFS? SIMMM!}}**
 
 Para os labirintos com comida (`mediumDottedMaze`) e com fantasmas (`mediumScaryMaze`), foram obtidos custos de 1 e aproximadamente 68 milhões, respectivamente. O custo no labirinto com fantasmas é alto devido ao constante movimento de cada um dos fantasmas, que influencia na decisão do Pacman de qual caminho seguir.
 
-<img src=“img/004.png”>
+![UCS](img/004.png)
 *Busca de custo uniforme no* `mediumDottedMaze`*.*
 
 ```
@@ -128,7 +130,7 @@ Win Rate:      1/1 (1.00)
 Record:        Win
 ```
 
-<img src=“img/005.png”>
+![UCS](img/005.png)
 *Busca de custo uniforme no* `mediumScaryMaze`*.*
 
 ```
