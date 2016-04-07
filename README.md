@@ -154,3 +154,37 @@ Record:        Win
 A busca A* utiliza uma fila de prioridade com uma heurística, ou seja, uma função que influencia na decisão de qual caminho será seguido. Essa função pode ser definida como `f(n) = g(n) + h(n)`, onde `g(n)` representa o custo do caminho até o nó atual, e `h(n)` uma heurística a ser escolhida. Uma heurística comum para problemas de locomoção é a da distância Manhattan, que calcula a distância em linha reta entre o nó atual e nó objetivo, estando já implementada no arquivo `searchAgents.py`.
 
 Para implementar a busca A*, foi então utilizada uma `PriorityQueueWithFunction`, cujo 
+
+
+pc1@pc1-OptiPlex-780:~/Documentos/labia-tp1/search$ python pacman.py -l openMaze -p SearchAgent -a fn=dfs
+[SearchAgent] using function dfs
+[SearchAgent] using problem type PositionSearchProblem
+Path found with total cost of 298 in 0.1 seconds
+Search nodes expanded: 806
+Pacman emerges victorious! Score: 212
+Average Score: 212.0
+Scores:        212
+Win Rate:      1/1 (1.00)
+Record:        Win
+
+pc1@pc1-OptiPlex-780:~/Documentos/labia-tp1/search$ python pacman.py -l openMaze -p SearchAgent -a fn=astar
+[SearchAgent] using function astar and heuristic nullHeuristic
+[SearchAgent] using problem type PositionSearchProblem
+Path found with total cost of 54 in 87.7 seconds
+Search nodes expanded: 2704288
+Pacman emerges victorious! Score: 456
+Average Score: 456.0
+Scores:        456
+Win Rate:      1/1 (1.00)
+Record:        Win
+
+pc1@pc1-OptiPlex-780:~/Documentos/labia-tp1/search$ python pacman.py -l openMaze -p SearchAgent -a fn=ucs
+[SearchAgent] using function ucs
+[SearchAgent] using problem type PositionSearchProblem
+Path found with total cost of 54 in 85.7 seconds
+Search nodes expanded: 2704288
+Pacman emerges victorious! Score: 456
+Average Score: 456.0
+Scores:        456
+Win Rate:      1/1 (1.00)
+Record:        Win
