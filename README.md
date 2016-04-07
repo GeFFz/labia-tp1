@@ -10,14 +10,16 @@
 Para implementar o algoritmo de busca em profundidade (DFS, *depth first search*), foram utilizados as funções pré-implementadas no arquivo `util.py` de pilha (`util.Stack()`) em conjunto com os métodos para obter o estado inicial, obter os estados sucessores do estado atual e verificar se o mesmo é o final.
 
 A primeira ação do DFS é colocar o estado inicial em uma pilha. O algoritmo então:
+
 1. Verifica se o estado do topo não é equivalente ao estado final do labirinto, caso contrário;
-2. Marca o estado como visitado (`visited[currentState] = true`) e;
-3. Coloca os estados sucessores do estado atual em uma pilha, sempre considerando o caminho necessário até chegar nele próprio (dá `push` na tupla `(state, path + [action])`, onde `path` representa o caminho até ele próprio e `action` representa a ação para o chegar ao sucessor).
+1. Marca o estado como visitado (`visited[currentState] = true`) e;
+1. Coloca os estados sucessores do estado atual em uma pilha, sempre considerando o caminho necessário até chegar nele próprio (dá `push` na tupla `(state, path + [action])`, onde `path` representa o caminho até ele próprio e `action` representa a ação para o chegar ao sucessor).
+
 Os itens 1, 2 e 3 são repetidos até a fila estiver vazia, ou até encontrar o caminho solução. Além disso, esses três passos são repetidos com poucas alterações em todos os algoritmos posteriores (é um passo-a-passo de um algoritmo de busca genérico).
 
 **A ordem de exploração foi de acordo com o esperado? O Pacman realmente passa por  todos os estados explorados no seu caminho para o objetivo?**
 
-<img src=“img/001.png”>
+![alt text](img/001.png “DFS”)
 *Testando a DFS em um* `mediumMaze`*.*
 
 Na figura acima, os estados são coloridos mais intensamente de acordo com o número de vezes que foram visitados pela DFS. Assim, os estados com um vermelho mais vivo foram visitados mais vezes pelo algoritmo, enquanto os estados não coloridos nem chegam a ser explorados. Portanto, o Pacman não passa por todos os estados explorados, e sim apenas pelo caminho que o levará até seu objetivo.
