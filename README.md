@@ -1,10 +1,7 @@
-> CENTRO FEDERAL DE EDUCAÇÃO TECNOLÓGICA DE MINAS GERAIS
-
-> ENGENHARIA DE COMPUTAÇÃO
-
-> LABORATÓRIO DE INTELIGÊNCIA ARTIFICIAL
-
-> Prof. Flávio Cruzeiro
+###### CENTRO FEDERAL DE EDUCAÇÃO TECNOLÓGICA DE MINAS GERAIS
+###### ENGENHARIA DE COMPUTAÇÃO
+###### LABORATÓRIO DE INTELIGÊNCIA ARTIFICIAL
+###### Prof. Flávio Cruzeiro
 
 ## TRABALHO PRÁTICO I: PACMAN
 #### por Pedro Felipe Froes & Saulo Antunes
@@ -26,9 +23,11 @@ Os itens 1, 2 e 3 são repetidos até a fila estiver vazia, ou até encontrar o 
 
 ![Testando a DFS em um mediumMaze](img/001.png)
 
-Na figura acima, os estados são coloridos mais intensamente de acordo com o número de vezes que foram visitados pela DFS. Assim, os estados com um vermelho mais vivo foram visitados mais vezes pelo algoritmo, enquanto os estados não coloridos nem chegam a ser explorados. Portanto, o Pacman não passa por todos os estados explorados, e sim apenas pelo caminho que o levará até seu objetivo.
+Na figura acima, os estados são coloridos mais intensamente de acordo com a ordem de visitação pela DFS. Assim, os estados com um vermelho mais vivo foram visitados antes dos estados coloridos de um vermelho menos intenso, enquanto os estados não coloridos nem chegam a ser explorados. Portanto, o Pacman não passa por todos os estados explorados, e sim apenas pelo caminho que o levará até seu objetivo.
 
 A ordem de exploração ocorreu de acordo com o esperado, com 146 nós expandidos, e com um custo total de 130 para o `mediumMaze`.
+
+`python pacman.py -l mediumMaze -p SearchAgent`
 
 ```
 Path found with total cost of 130 in 0.0 seconds
@@ -41,6 +40,8 @@ Record:        Win
 ```
 
 Para o `tiny maze`, esse número foi de 10, e no `bigMaze`,  210. É possível ainda verificar que, quando os sucessores são colocados em ordem reversa (no item 3, através do método `reversed`, o custo do caminho é, de fato, 246 para o `mediumMaze`.
+
+`python pacman.py -l mediumMaze -p SearchAgent`
 
 ```
 Path found with total cost of 246 in 0.0 seconds
@@ -68,6 +69,8 @@ A implementação é análoga aos 3 passos da DFS, exceto que foi utilizada uma 
 Sim, a BFS retorna o primeiro caminho encontrado, da mesma maneira que a DFS. A diferença é que o primeiro caminho da BFS é o caminho ótimo, algo que não é necessariamente verdade na DFS.
 
 É possível testar essa implementação da BFS com o jogo do quebra-cabeça de 8 peças. Para o quebra-cabeça aleatório abaixo, a BFS encontra a solução ótima em 13 movimentos.
+
+`python eightpuzzle.py`
 
 ```
 A random puzzle:
@@ -114,11 +117,14 @@ After 13 moves: up
 A DFS e a BFS não consideravam o custo para a sequência de movimentos do Pacman. Para implementar um algoritmo que considera custos diferentes entre os possíveis movimentos – nesse caso, a busca de custo uniforme – basta realizar duas alterações no algoritmo genérico de busca: o passo 3 considera agora o custo em conjunto com o estado e a ação dos sucessores do estado atual, e uma fila de prioridades é utilizada em detrimento de uma pilha ou fila regular.
 
 Para o `mediumMaze` regular utilizado, a busca teve custo total de 152.
+
 **{{DUVIDA: não deveria ser equivalente ao BFS? SIMMM!}}**
 
 Para os labirintos com comida (`mediumDottedMaze`) e com fantasmas (`mediumScaryMaze`), foram obtidos custos de 1 e aproximadamente 68 milhões, respectivamente. O custo no labirinto com fantasmas é alto devido ao constante movimento de cada um dos fantasmas, que influencia na decisão do Pacman de qual caminho seguir.
 
 ![Busca de custo uniforme no mediumDottedMaze](img/004.png)
+
+`python pacman.py -l mediumDottedMaze -p StayEastSearchAgent`
 
 ```
 Path found with total cost of 1 in 0.0 seconds
@@ -132,6 +138,8 @@ Record:        Win
 
 ![Busca de custo uniforme no mediumScaryMaze](img/005.png)
 
+`python pacman.py -l mediumScaryMaze -p StayWestSearchAgent`
+
 ```
 Path found with total cost of 68719479864 in 0.0 seconds
 Search nodes expanded: 92
@@ -143,4 +151,6 @@ Record:        Win
 ```
 
 ##### Passo 4: Busca A*
+A busca A* utiliza uma fila de prioridade com uma heurística, ou seja, uma função que influencia na decisão de qual caminho será seguido. Essa função pode ser definida como `f(n) = g(n) + h(n)`, onde `g(n)` representa o custo do caminho até o nó atual, e `h(n)` uma heurística a ser escolhida. Uma heurística comum para problemas de locomoção é a da distância Manhattan, que calcula a distância em linha reta entre o nó atual e nó objetivo, estando já implementada no arquivo `searchAgents.py`.
 
+Para implementar a busca A*, foi então utilizada uma `PriorityQueueWithFunction`, cujo 
