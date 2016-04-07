@@ -156,7 +156,7 @@ A busca A* utiliza uma fila de prioridade com uma heurística, ou seja, uma fun�
 Para implementar a busca A*, foi então utilizada uma `PriorityQueueWithFunction`, cujo 
 
 
-pc1@pc1-OptiPlex-780:~/Documentos/labia-tp1/search$ python pacman.py -l openMaze -p SearchAgent -a fn=dfs
+$ python pacman.py -l openMaze -p SearchAgent -a fn=dfs
 [SearchAgent] using function dfs
 [SearchAgent] using problem type PositionSearchProblem
 Path found with total cost of 298 in 0.1 seconds
@@ -167,18 +167,18 @@ Scores:        212
 Win Rate:      1/1 (1.00)
 Record:        Win
 
-pc1@pc1-OptiPlex-780:~/Documentos/labia-tp1/search$ python pacman.py -l openMaze -p SearchAgent -a fn=astar
+$ python pacman.py -l openMaze -p SearchAgent -a fn=astar
 [SearchAgent] using function astar and heuristic nullHeuristic
 [SearchAgent] using problem type PositionSearchProblem
 Path found with total cost of 54 in 87.7 seconds
 Search nodes expanded: 2704288
 Pacman emerges victorious! Score: 456
-Average Score: 456.0
+Average Score: 456.0	
 Scores:        456
 Win Rate:      1/1 (1.00)
 Record:        Win
 
-pc1@pc1-OptiPlex-780:~/Documentos/labia-tp1/search$ python pacman.py -l openMaze -p SearchAgent -a fn=ucs
+$ python pacman.py -l openMaze -p SearchAgent -a fn=ucs
 [SearchAgent] using function ucs
 [SearchAgent] using problem type PositionSearchProblem
 Path found with total cost of 54 in 85.7 seconds
@@ -186,5 +186,30 @@ Search nodes expanded: 2704288
 Pacman emerges victorious! Score: 456
 Average Score: 456.0
 Scores:        456
+Win Rate:      1/1 (1.00)
+Record:        Win
+
+
+Food
+
+$ python pacman.py -l testSearch -p SearchAgent -a fn=astar,prob=FoodSearchProblem
+[SearchAgent] using function astar and heuristic nullHeuristic
+[SearchAgent] using problem type FoodSearchProblem
+Path found with total cost of 7 in 0.0 seconds
+Search nodes expanded: 15
+Pacman emerges victorious! Score: 513
+Average Score: 513.0
+Scores:        513
+Win Rate:      1/1 (1.00)
+Record:        Win
+
+Heuristic
+
+$ python pacman.py -l trickySearch -p AStarFoodSearchAgent
+Path found with total cost of 108 in 0.8 seconds
+Search nodes expanded: 3531
+Pacman emerges victorious! Score: 522
+Average Score: 522.0
+Scores:        522
 Win Rate:      1/1 (1.00)
 Record:        Win

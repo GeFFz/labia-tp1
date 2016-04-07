@@ -419,7 +419,7 @@ def foodHeuristic(state, problem):
   as well.
   
   If using A* ever finds a solution that is worse uniform cost search finds,
-  your heuristic is *not* consistent, and probably not admissible!  On the other hand,
+  your heuristic is *not* consistent, and probably not 'admissible'!  On the other hand,
   inadmissible or inconsistent heuristics may find optimal solutions, so be careful.
   
   The state is a tuple ( pacmanPosition, foodGrid ) where foodGrid is a 
@@ -435,10 +435,19 @@ def foodHeuristic(state, problem):
     problem.heuristicInfo['wallCount'] = problem.walls.count()
   Subsequent calls to this heuristic can access problem.heuristicInfo['wallCount']
   """
-  position, foodGrid = state
   "*** YOUR CODE HERE ***"
-  return 0
   
+  position, foodGrid = state
+  foods = foodGrid.asList()
+
+  distance = 0
+
+  for food in foods:
+      distance += util.manhattanDistance(food, position)
+
+  return distance
+
+
 class ClosestDotSearchAgent(SearchAgent):
   "Search for all food using a sequence of searches"
   def registerInitialState(self, state):

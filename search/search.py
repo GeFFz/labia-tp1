@@ -156,16 +156,17 @@ def nullHeuristic(state, problem=None):
   """
   return 0
 
-def myHeuristic((state, path)):
+def myHeuristic(state, problem=None):
     return util.manhattanDistance(state, (1,1)) # (1, 1) == final state
 
 def aStarSearch(problem, heuristic=nullHeuristic):
   "Search the node that has the lowest combined cost and heuristic first."
   "*** YOUR CODE HERE ***"
-  priorityQueue = util.PriorityQueueWithFunction(myHeuristic) # (state, path)
+  #priorityQueue = util.PriorityQueueWithFunction(heuristic) # (state, path)
+  priorityQueue = util.PriorityQueue() # (state, path)
   visited = {}
 
-  priorityQueue.push((problem.getStartState(), []))
+  priorityQueue.push((problem.getStartState(), []), 0)
 
   while not priorityQueue.isEmpty():
     currentState, path = priorityQueue.pop()
@@ -177,7 +178,7 @@ def aStarSearch(problem, heuristic=nullHeuristic):
 
     for state, action, _ in problem.getSuccessors(currentState):
       if not visited.has_key(state):
-        priorityQueue.push((state, path + [action]))
+        priorityQueue.push((state, path + [action]), heuristic(state, problem))
     
   
 # Abbreviations
