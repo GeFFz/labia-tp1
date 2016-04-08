@@ -147,7 +147,7 @@ def uniformCostSearch(problem):
 
     for state, action, cost in problem.getSuccessors(currentState):
       if not visited.has_key(state):
-        queue.push( (state, path + [action]) , cost)
+        queue.push((state, path + [action]), problem.getCostOfActions(path + [action]))
 
 def nullHeuristic(state, problem=None):
   """
@@ -166,7 +166,7 @@ def aStarSearch(problem, heuristic=nullHeuristic):
   priorityQueue = util.PriorityQueue() # (state, path)
   visited = {}
 
-  priorityQueue.push((problem.getStartState(), []), 0)
+  priorityQueue.push((problem.getStartState(), []), heuristic(problem.getStartState(), problem))
 
   while not priorityQueue.isEmpty():
     currentState, path = priorityQueue.pop()
@@ -176,9 +176,9 @@ def aStarSearch(problem, heuristic=nullHeuristic):
 
     visited[currentState] = True
 
-    for state, action, _ in problem.getSuccessors(currentState):
+    for state, action, cost in problem.getSuccessors(currentState):
       if not visited.has_key(state):
-        priorityQueue.push((state, path + [action]), heuristic(state, problem))
+        priorityQueue.push((state, path + [action]), problem.getCostOfActions(path + [action]) + heuristic(state, problem))
     
   
 # Abbreviations
