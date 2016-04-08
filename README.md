@@ -231,6 +231,7 @@ Nem todas as buscas são capazes de encontrar a solução em um tempo pequeno qu
 
 `$ python pacman.py -l openMaze -p SearchAgent -a fn=dfs`
 
+```
 [SearchAgent] using function dfs
 [SearchAgent] using problem type PositionSearchProblem
 Path found with total cost of 298 in 0.1 seconds
@@ -240,6 +241,7 @@ Average Score: 212.0
 Scores:        212
 Win Rate:      1/1 (1.00)
 Record:        Win
+```
 
 Entretanto, a busca A* é capaz de encontrar a solução em tempo menor que a `dfs`, sendo que o caminho encontrado é, de fato, o caminho ótimo até o objetivo. Em comparação com a busca em profundidade que possui custo de 298, a A* tem custo de somente 54 com 211 nós expandidos.
 
@@ -276,16 +278,34 @@ Win Rate:      1/1 (1.00)
 Record:        Win
 ```
 
-*Parte de implementar a heurística*
+Para implementar uma heurística que fizesse o Pacman comer todas as comidas no menor caminho, foi utilizado a posição do Pacman e das comidas no labirinto como estado. A cada estado, é possível listar onde as comidas estão no tabuleiro com o método `foodGrid.asList()`.
+
+A heurística implementada consiste em analisar a distância Manhattan para todas as comidas restantes no labirinto (ou seja, todas as comidas restantes em `foods = foodGrid.asList()`). A distância é somada com os valores obtidos, retornando o valor para obter a comida mais próxima do Pacman. O procedimento anterior é repetido sucessivas vezes até que todas as comidas sejam consumidas no labirinto.
 
 
-Heuristic
+```python
+def foodHeuristic(state, problem):
 
-$ python pacman.py -l trickySearch -p AStarFoodSearchAgent
-Path found with total cost of 108 in 0.8 seconds
-Search nodes expanded: 3531
-Pacman emerges victorious! Score: 522
-Average Score: 522.0
-Scores:        522
+	position, foodGrid = state
+  	foods = foodGrid.asList()
+	distance = 0
+
+	for food in foods:
+		distance += util.manhattanDistance(food, position)
+	
+	return distance
+```
+
+![Busca A* com foodHeuristic no trickyMaze](img/011.png)
+
+`$ python pacman.py -l trickySearch -p AStarFoodSearchAgent`
+
+```
+Path found with total cost of 60 in 2.0 seconds
+Search nodes expanded: 6076
+Pacman emerges victorious! Score: 570
+Average Score: 570.0
+Scores:        570
 Win Rate:      1/1 (1.00)
 Record:        Win
+```
