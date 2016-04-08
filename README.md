@@ -1,6 +1,9 @@
 **CENTRO FEDERAL DE EDUCAÇÃO TECNOLÓGICA DE MINAS GERAIS**
+
 **ENGENHARIA DE COMPUTAÇÃO**
+
 **LABORATÓRIO DE INTELIGÊNCIA ARTIFICIAL**
+
 **Prof. Flávio Cruzeiro**
 
 ### TRABALHO PRÁTICO I: PACMAN
@@ -244,6 +247,7 @@ Entretanto, a busca A* é capaz de encontrar a solução em tempo menor que a `d
 
 `$ python pacman.py -l openMaze -p SearchAgent -a fn=astar,heuristic=manhattanHeuristic`
 
+```
 [SearchAgent] using function astar and heuristic manhattanHeuristic
 [SearchAgent] using problem type PositionSearchProblem
 Path found with total cost of 54 in 0.0 seconds
@@ -253,6 +257,7 @@ Average Score: 456.0
 Scores:        456
 Win Rate:      1/1 (1.00)
 Record:        Win
+```
 
 ##### Passo 5: Coletando comida
 Para que o Pacman possa comer a comida no menor número de passos possíveis, uma heurística pode ser implementada considerando a posição do Pacman e das comidas no labirinto. Primeiramente, é possível verificar que, com uma heurística nula, a busca A* encontra a solução com custo 7 no problema `testSearch`.
