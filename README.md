@@ -44,7 +44,7 @@ Win Rate:      1/1 (1.00)
 Record:        Win
 ```
 
-Para o `tiny maze`, esse número foi de 10, e no `bigMaze`,  210. É possível ainda verificar que, quando os sucessores são colocados em ordem reversa (no item 3, através do método `reversed`, o custo do caminho é, de fato, 246 para o `mediumMaze`.
+Para o `tinyMaze`, esse número foi de 10, e no `bigMaze`,  210. É possível ainda verificar que, quando os sucessores são colocados em ordem reversa (no item 3, através do método `reversed`, o custo do caminho é, de fato, 246 para o `mediumMaze`.
 
 `$ python pacman.py -l mediumMaze -p SearchAgent`
 
@@ -185,9 +185,11 @@ Record:        Win
 ```
 
 ##### Passo 4: Busca A*
-A busca A* utiliza uma fila de prioridade com uma heurística, ou seja, uma função que influencia na decisão de qual caminho será seguido. Essa função pode ser definida como `f(n) = g(n) + h(n)`, onde `g(n)` representa o custo do caminho até o nó atual, e `h(n)` uma heurística a ser escolhida. Uma heurística comum para problemas de locomoção é a da distância Manhattan, que calcula a distância em linha reta entre o nó atual e nó objetivo, e que já está implementada no arquivo `searchAgents.py`.
+A busca A* utiliza uma fila de prioridade com uma heurística, ou seja, uma função que influencia na decisão de qual caminho será seguido. Essa função pode ser definida como `f(n) = g(n) + h(n)`, onde `g(n)` representa o custo do caminho até o nó atual, e `h(n)` uma heurística a ser escolhida. Uma heurística comum para problemas de locomoção é a da distância Manhattan, que calcula a distância em L entre o nó atual e nó objetivo, e que já está implementada no arquivo `searchAgents.py`.
 
-Para implementar a busca A*, foi então utilizada uma `PriorityQueue` cujo custo é definido por uma heurística, ao contrário da `ucs`. Ao adicionar os nós sucessores durante o passo 3 do algoritmo de busca mostrado inicialmente, a busca `astar` considera o custo como o valor do caminho atual adicionado ao valor para chegar até o nó sucessor (`g(n)`), e isso é somado ao valor encontrado aplicando a heurística escolhida (`h(n)`).
+![Distância de Manhattan x Distância Euclidiana](img/012.png)
+
+Para implementar a busca A*, foi então utilizada uma `PriorityQueue` cuja prioridade é definida por uma função heurística. Ao adicionar os nós sucessores durante o passo 3 do algoritmo de busca mostrado inicialmente, a busca `astar` considera o custo como o valor do caminho atual adicionado ao valor para chegar até o nó sucessor (`g(n)`), e isso é somado ao valor encontrado aplicando a heurística escolhida (`h(n)`).
 
 ![Busca A* no bigMaze](img/006.png)
 
