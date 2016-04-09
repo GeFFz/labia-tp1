@@ -68,6 +68,28 @@ def tinyMazeSearch(problem):
   e = Directions.EAST
   return  [w,w,w,w,s,s,e,s,s]
 
+def search(problem, struct):
+  visited = util.Counter()
+  struct.push((problem.getStartState(), [])) # (state, path)
+
+  while not struct.isEmpty():
+    currentState, path = struct.pop()
+
+    if visited[currentState]:
+      continue
+
+    if problem.isGoalState(currentState):
+      return path
+
+    visited[currentState] = True
+
+    for state, action, _ in problem.getSuccessors(currentState):
+      struct.push((state, path + [action]))
+
+    # Reverse
+    # for state, action, _ in reversed(problem.getSuccessors(currentState)):
+    #  struct.push((state, path + [action]))
+
 def depthFirstSearch(problem):
   """
   Search the deepest nodes in the search tree first [p 85].
@@ -84,70 +106,23 @@ def depthFirstSearch(problem):
   """
   "*** YOUR CODE HERE ***"
 
-  stack = util.Stack() # (state, path)
-  visited = {}
-
-  stack.push( (problem.getStartState(), []) )
-
-  while not stack.isEmpty():
-    currentState, path = stack.pop()
-
-    if problem.isGoalState(currentState):
-      return path
-
-    visited[currentState] = True
-
-    for state, action, _ in problem.getSuccessors(currentState):
-      if not visited.has_key(state):
-        stack.push( (state, path + [action]) )
-
-    # Reverse
-    # for state, action, _ in reversed(problem.getSuccessors(currentState)):
-    #   if not visited.has_key(state):
-    #     stack.push( (state, path + [action]) )
+  return search(problem, util.Stack())
 
 
 def breadthFirstSearch(problem):
   "Search the shallowest nodes in the search tree first. [p 81]"
   "*** YOUR CODE HERE ***"
   
-  queue = util.Queue() # (state, path)
-  visited = {}
-
-  queue.push( (problem.getStartState(), []) )
-
-  while not queue.isEmpty():
-    currentState, path = queue.pop()
-
-    if problem.isGoalState(currentState):
-      return path
-
-    visited[currentState] = True
-
-    for state, action, _ in problem.getSuccessors(currentState):
-      if not visited.has_key(state):
-        queue.push( (state, path + [action]) )
+  return search(problem, util.Queue())
       
 def uniformCostSearch(problem):
   "Search the node of least total cost first. "
   "*** YOUR CODE HERE ***"
-  
-  queue = util.PriorityQueue() # (state, path)
-  visited = {}
 
-  queue.push( (problem.getStartState(), []) , 0)
+  def fn((state, path)):
+    return problem.getCostOfActions(path)
 
-  while not queue.isEmpty():
-    currentState, path = queue.pop()
-
-    if problem.isGoalState(currentState):
-      return path
-
-    visited[currentState] = True
-
-    for state, action, cost in problem.getSuccessors(currentState):
-      if not visited.has_key(state):
-        queue.push((state, path + [action]), problem.getCostOfActions(path + [action]))
+  return search(problem, util.PriorityQueueWithFunction(fn))
 
 def nullHeuristic(state, problem=None):
   """
@@ -157,29 +132,17 @@ def nullHeuristic(state, problem=None):
   return 0
 
 def myHeuristic(state, problem=None):
-    return util.manhattanDistance(state, (1,1)) # (1, 1) == final state
+  return util.manhattanDistance(state, problem.goal)
 
 def aStarSearch(problem, heuristic=nullHeuristic):
   "Search the node that has the lowest combined cost and heuristic first."
   "*** YOUR CODE HERE ***"
-  #priorityQueue = util.PriorityQueueWithFunction(heuristic) # (state, path)
-  priorityQueue = util.PriorityQueue() # (state, path)
-  visited = {}
+  
+  def fn((state, path)):
+    return problem.getCostOfActions(path) + heuristic(state, problem)
 
-  priorityQueue.push((problem.getStartState(), []), heuristic(problem.getStartState(), problem))
+  return search(problem, util.PriorityQueueWithFunction(fn))
 
-  while not priorityQueue.isEmpty():
-    currentState, path = priorityQueue.pop()
-
-    if problem.isGoalState(currentState):
-      return path
-
-    visited[currentState] = True
-
-    for state, action, cost in problem.getSuccessors(currentState):
-      if not visited.has_key(state):
-        priorityQueue.push((state, path + [action]), problem.getCostOfActions(path + [action]) + heuristic(state, problem))
-    
   
 # Abbreviations
 bfs = breadthFirstSearch
