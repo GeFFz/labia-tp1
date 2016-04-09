@@ -227,7 +227,16 @@ Record:        Win
 
 **O que acontece em** `openMaze` **para as várias estratégias de busca?**
 
-Nem todas as buscas são capazes de encontrar a solução em um tempo pequeno quando aplicadas no `openMaze`, dado que a possibilidade de estados a serem explorados é muito grande. Enquanto não foi possível computar a solução das buscas `bfs` e `ucs`,  a `dfs` é a que consegue encontrar a solução mais rapidamente dentre as três devido à sua característica de usar como solução o primeiro caminho encontrado, que não necessariamente é o caminho ótimo.
+No `openMaze`, devido as condições do labirinto, pode-se perceber uma diferença significante entre os algoritmos.
+
+| Algoritmo | Custo | Nós Expandidos | Score |
+|:---------:|:-----:|:--------------:|:-----:|
+| DFS | 298 | 576 | 212 |
+| BFS | 54 | 682 | 456 |
+| UCS | 54 | 682 | 456 |
+| A* | 54 | 211 | 456 |
+
+O DFS não obteve uma solução ótima, pois retornou o primeiro caminho que chegava a solução. O BFS e o UCS tiveram o mesmo comportamento, isso acontece devido as ações possuírem o mesmo custo. Enquanto que o A* obteve o mesmo resultado porém com um número 3x menor em relação a quantidade de nós expandidos.
 
 ![DFS no openMaze](img/008.png)
 
@@ -244,8 +253,6 @@ Scores:        212
 Win Rate:      1/1 (1.00)
 Record:        Win
 ```
-
-Entretanto, a busca A* é capaz de encontrar a solução em tempo menor que a `dfs`, sendo que o caminho encontrado é, de fato, o caminho ótimo até o objetivo. Em comparação com a busca em profundidade que possui custo de 298, a A* tem custo de somente 54 com 211 nós expandidos.
 
 ![Busca A* no openMaze](img/009.png)
 
