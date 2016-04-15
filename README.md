@@ -216,7 +216,7 @@ A busca A* de fato encontra a solução ótima um pouco mais rapidamente que a b
 ```
 [SearchAgent] using function ucs
 [SearchAgent] using problem type PositionSearchProblem
-Path found with total cost of 210 in 0.2 seconds
+Path found with total cost of 210 in 0.3 seconds
 Search nodes expanded: 619
 Pacman emerges victorious! Score: 300
 Average Score: 300.0
@@ -246,7 +246,7 @@ O DFS não obteve uma solução ótima, pois retornou o primeiro caminho que che
 [SearchAgent] using function dfs
 [SearchAgent] using problem type PositionSearchProblem
 Path found with total cost of 298 in 0.1 seconds
-Search nodes expanded: 806
+Search nodes expanded: 576
 Pacman emerges victorious! Score: 212
 Average Score: 212.0
 Scores:        212
@@ -261,7 +261,7 @@ Record:        Win
 ```
 [SearchAgent] using function astar and heuristic manhattanHeuristic
 [SearchAgent] using problem type PositionSearchProblem
-Path found with total cost of 54 in 0.0 seconds
+Path found with total cost of 54 in 0.1 seconds
 Search nodes expanded: 211
 Pacman emerges victorious! Score: 456
 Average Score: 456.0
@@ -278,7 +278,7 @@ Para que o Pacman possa comer a comida no menor número de passos possíveis, um
 `$ python pacman.py -l testSearch -p AStarFoodSearchAgent`
 
 ```
-Path found with total cost of 7 in 0.0 seconds
+Path found with total cost of 7 in 0.1 seconds
 Search nodes expanded: 8
 Pacman emerges victorious! Score: 513
 Average Score: 513.0
@@ -311,7 +311,7 @@ def foodHeuristic(state, problem):
 
 ```
 Path found with total cost of 60 in 2.0 seconds
-Search nodes expanded: 6076
+Search nodes expanded: 5424
 Pacman emerges victorious! Score: 570
 Average Score: 570.0
 Scores:        570
