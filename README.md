@@ -172,7 +172,7 @@ Record:        Win
 
 ![Busca de custo uniforme no mediumScaryMaze](img/005.png)
 
-`python pacman.py -l mediumScaryMaze -p StayWestSearchAgent`
+`$ python pacman.py -l mediumScaryMaze -p StayWestSearchAgent`
 
 ```
 Path found with total cost of 68719479864 in 0.0 seconds
@@ -193,7 +193,7 @@ Para implementar a busca A*, foi então utilizada uma `PriorityQueue` cuja prior
 
 ![Busca A* no bigMaze](img/006.png)
 
-`python pacman.py -l bigMaze -z .5 -p SearchAgent –a fn=astar,heuristic=manhattanHeuristic`
+`$ python pacman.py -l bigMaze -z .5 -p SearchAgent -a fn=astar,heuristic=manhattanHeuristic`
 
 ```
 [SearchAgent] using function astar and heuristic manhattanHeuristic
@@ -275,7 +275,7 @@ Para que o Pacman possa comer a comida no menor número de passos possíveis, um
 
 ![Busca A* no testSearch](img/010.png)
 
-`python pacman.py -l testSearch -p AStarFoodSearchAgent`
+`$ python pacman.py -l testSearch -p AStarFoodSearchAgent`
 
 ```
 Path found with total cost of 7 in 0.0 seconds
